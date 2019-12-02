@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+  <head>
+    <meta charset="uft-8"/>
+    <title>Medidor de actividad física</title>
+  </head>
+  <body>
+    <h1>Introduzca el codigo del medidor de actividad fisica</h1>
+      <input id= "code" type="text" name="codigo"></input>
+      <button  id="button" class="float-left submit-button" >enter</button>
+
+<script>
+        function getCode(response){
+
+          var codes = response.data.map(item => {
+            return item.codigo
+          })
+          return {codes}
+        }
+          axios({
+            url: 'http://localhost:8080/api/fechas/acc',
+            method: 'get'
+          }).then(response => {
+            let codes = getCode(response)
+            
+            document.getElementById("button").onclick = function () {
+              var code = document.getElementById("code").value;
+              if(codes.contains(code)){
+                location.href = "http://localhost/client/index.html";
+              }
+
+            };
+          })
+
+
+</script>
+
+
+  </body>
+
+</html>
